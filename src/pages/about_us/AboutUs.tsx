@@ -1,0 +1,69 @@
+import React from "react";
+import FirstSection from "../../components/pages/about_us/FirstSection";
+import Statistics from "../../components/pages/about_us/Statistics";
+import AboutContent from "../../components/pages/about_us/AboutContent";
+import OurTeam from "../../components/pages/about_us/OurTeam";
+import OurAgents from "../../components/pages/about_us/OurAgents";
+import OurBrands from "../../components/pages/about_us/OurBrands";
+import BackgroundImage from "../../components/items/about_us/BackgroundImage";
+import Reviews from "../../components/pages/about_us/Reviews";
+import OurValues from "../../components/pages/about_us/OurValues";
+import { motion } from "framer-motion";
+import LoadingPage from "../loadingPage/LoadingPage";
+import { useGetAboutUsInfoQuery } from "../../api/about_us/queries";
+import AboutContentItem from "../../components/items/about_us/AboutContentItem";
+const AboutUs = () => {
+  const { data: aboutUsInfo, isLoading, isError } = useGetAboutUsInfoQuery();
+  if (isLoading) return <LoadingPage />;
+  if (isError) return <div></div>;
+  console.log(aboutUsInfo);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="relative">
+        <div className="flex w-full h-20 md:h-32 lg:h-32 bg-primary">
+          <h1 className="text-2xl lg:text-5xl font-header text-white text-center  my-auto mx-auto">
+            {aboutUsInfo?.title}
+          </h1>
+        </div>
+        <FirstSection
+          subTitle={aboutUsInfo?.brief.title ?? ""}
+          title="WHO WE ARE ?"
+          description={aboutUsInfo?.brief.description ?? ""}
+        />
+        <Statistics />
+        <div>
+          {aboutUsInfo?.content.map((content, index) => (
+            <AboutContentItem
+              key={index}
+              title={content.title}
+              // subtitle="SETTING NEW INDUSTRY STANDARDS"
+              description={content.description}
+              img={content.img}
+              reverse={index % 2 !== 0}
+            />
+          ))}
+        </div>
+        <OurValues values={aboutUsInfo?.ourValues ?? []} />
+        <BackgroundImage
+          minHeight={950}
+          url="https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg"
+        />
+        <OurTeam />
+        <OurAgents />
+        <BackgroundImage
+          minHeight={950}
+          url="https://i.imgur.com/MvnLNR6.jpg"
+        />
+        {/* <OurBrands /> */}
+        {/* <Reviews /> */}
+      </div>
+    </motion.div>
+  );
+};
+
+export default AboutUs;
