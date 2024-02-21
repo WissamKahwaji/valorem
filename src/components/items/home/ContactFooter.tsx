@@ -21,27 +21,44 @@ const ContactFooter = () => {
           <img
             src="https://i.imgur.com/RCTjuUc.png"
             alt=""
-            className="h-auto w-64 sm:h-auto sm:w-64 md:h-auto md:w-64 lg:h-auto lg:w-64 object-cover mb-3 lg:mb-10 md:mb-14"
+            className="h-auto w-44 sm:h-auto sm:w-64 md:h-auto md:w-64 lg:h-auto lg:w-64 object-cover mb-3 lg:mb-10 md:mb-14"
           />
         </a>
         <div className="flex flex-col md:flex-row justify-evenly items-center md:items-start lg:items-start w-full max-w-6xl mx-auto  px-4 md:px-3">
           <div className="flex flex-col justify-between  h-full mb-8 md:mb-0 md:w-1/2 md:mr-2">
-            <p className="font-header font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl text-white mb-4 text-center md:text-left">
+            <p className="font-header font-bold text-lg sm:text-lg md:text-4xl lg:text-5xl text-white mb-4 text-center md:text-left">
               REGISTER YOUR INTEREST
             </p>
-            <IconWithText
-              icon={
-                <FaEnvelope className="w-6 h-6 mb-4 md:mb-8 text-subTitle" />
-              }
-              phoneNumber={contactUsInfo?.content.email ?? ""}
-            />
 
-            <IconWithText
+            <div
+              className="flex flex-row items-start cursor-pointer"
+              onClick={() => {
+                window.location.href = `mailto:${contactUsInfo?.content.email}`;
+              }}
+            >
+              <FaEnvelope className="w-4 h-4 md:w-6 md:h-6 lg:w-6 lg:h-6 mb-4 md:mb-8 text-subTitle" />
+              <span className="ml-4 text-sm lg:text-lg font-body text-white">
+                {contactUsInfo?.content.email}
+              </span>
+            </div>
+
+            {/* <IconWithText
               icon={
                 <FaPhoneAlt className="w-6 h-6 mb-4 md:mb-8 text-subTitle" />
               }
               phoneNumber={contactUsInfo?.content.mobileOne ?? ""}
-            />
+            /> */}
+            <div
+              className="flex flex-row items-start cursor-pointer"
+              onClick={() => {
+                window.location.href = `tel:${contactUsInfo?.content.mobileOne}`;
+              }}
+            >
+              <FaPhoneAlt className="w-4 h-4 md:w-6 md:h-6 lg:w-6 lg:h-6 mb-4 md:mb-8 text-subTitle" />
+              <span className="ml-4 text-sm lg:text-lg font-body text-white">
+                {contactUsInfo?.content.mobileOne}
+              </span>
+            </div>
             <IconWithText
               icon={
                 <FaMapMarkerAlt className="w-6 h-6 mb-4 md:mb-8 text-subTitle" />

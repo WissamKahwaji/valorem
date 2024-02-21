@@ -14,6 +14,8 @@ export type Content = {
   faceBook: string;
   instagram: string;
   threads: string;
+  linkedIn: string;
+  youtube: string;
   snapChat: string;
   longitude: number;
   latitude: number;

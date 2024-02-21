@@ -6,7 +6,7 @@ type PropertyProps = {
   id: string;
   image: string;
   name: string;
-  price: number;
+  price: string;
   location: string;
   description: string;
   bedrooms: number;
@@ -19,7 +19,7 @@ const PropertyCard = (props: PropertyProps) => {
     <Link to={`/property-details/${props.id}`}>
       <div
         key={props.id}
-        className="h-[570px] md:h-[615px] lg:h-[630px] bg-white shadow-md rounded-lg overflow-hidden   duration-300 ease-in-out transform hover:scale-105"
+        className="h-[565px] md:h-[615px] lg:h-[630px] bg-white shadow-md rounded-lg overflow-hidden   duration-300 ease-in-out transform hover:scale-105"
       >
         <img
           src={props.image}
@@ -27,15 +27,15 @@ const PropertyCard = (props: PropertyProps) => {
           className="w-full h-40 lg:h-64 object-cover"
         />
         <div className="bg-primary  py-2 px-4 text-white font-body font-bold text-xl">
-          AED {props.price}
+          {props.price}
         </div>
         <div className="p-4 h-14  text-center">
-          <h2 className="text-2xl md:text-lg  md:h-28 lg:h-14 font-semibold font-header mb-1">
+          <h2 className="text-lg md:text-lg  md:h-28 lg:h-14 font-semibold font-header mb-1">
             {props.name}
           </h2>
           <div className="flex flex-row md:h-14 justify-center">
-            <FaMapMarkerAlt className="text-2xl md:text-lg text-hoverColor mr-2" />
-            <p className="text-lg md:text-base font-body text-subTitle mb-3">
+            <FaMapMarkerAlt className="text-lg md:text-lg text-hoverColor mr-2" />
+            <p className="text-base md:text-base font-body text-subTitle mb-3">
               {props.location}
             </p>
           </div>

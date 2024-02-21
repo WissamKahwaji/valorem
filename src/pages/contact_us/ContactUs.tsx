@@ -31,6 +31,8 @@ const ContactUs = () => {
           snapChat={contactUsInfo?.content.snapChat ?? ""}
           threads={contactUsInfo?.content.threads ?? ""}
           whatsApp={contactUsInfo?.content.whatsApp ?? ""}
+          youtube={contactUsInfo?.content.youtube ?? ""}
+          linkedIn={contactUsInfo?.content.linkedIn ?? ""}
         />
         <ContactForm />
       </div>

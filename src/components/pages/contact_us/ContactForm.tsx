@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import baseUrl from "../../../constants/domain";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,11 +19,29 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // You can handle form submission logic here
     console.log(formData);
-    // Clear form fields after submission if needed
+    try {
+      const response = await fetch(`${baseUrl}/contact/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+        alert("Your Enquery sent successfully!");
+      } else {
+        console.error("Failed to send email");
+        alert("Failed to send request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send request. Please try again.");
+    }
     setFormData({
       name: "",
       email: "",

@@ -27,7 +27,7 @@ const HeaderSection = (props: HeaderSectionProps) => {
         <p className="text-3xl md:text-5xl text-white font-header mb-8 text-center px-4">
           {props.title}
         </p>
-        <p className="max-w-3xl text-center text-white font-body mb-3 text-sm md:text-lg lg:text-xl px-4">
+        <p className="max-w-3xl overflow-y-auto lg:overflow-y-hidden text-center text-white font-body mb-3 text-sm md:text-lg lg:text-xl px-4">
           {props.description}
         </p>
       </div>

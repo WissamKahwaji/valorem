@@ -28,7 +28,7 @@ const PropertySection = () => {
               image={property.img}
               location={property.location}
               description={property.description}
-              price={property.price}
+              price={property.breifDetails.at(3)?.value ?? "Call Us"}
               bathrooms={property.bedrooms}
               bedrooms={property.bathrooms}
               space={property.space}

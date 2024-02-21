@@ -6,6 +6,7 @@ import {
   FaLinkedin,
   FaSnapchatSquare,
   FaPhone,
+  FaYoutubeSquare,
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaSquareThreads } from "react-icons/fa6";
@@ -21,6 +22,8 @@ type ContactInfoSectionProps = {
   threads: string;
   snapChat: string;
   whatsApp: string;
+  youtube: string;
+  linkedIn: string;
 };
 const ContactInfoSection = (props: ContactInfoSectionProps) => {
   return (
@@ -80,29 +83,29 @@ const ContactInfoSection = (props: ContactInfoSectionProps) => {
         </p>
         <ul className="mb-2 flex gap-2">
           <li>
-            <Link to={props.facebook} target="_blank">
-              <FaFacebookSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
-            </Link>
-          </li>
-          <li>
             <Link to={`https://wa.me/${props.whatsApp}`} target="_blank">
               <FaWhatsappSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
             </Link>
           </li>
           <li>
-            <Link to={props.instagram} target="_blank">
-              <FaInstagramSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
+            <Link to={props.facebook} target="_blank">
+              <FaFacebookSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
             </Link>
           </li>
 
           <li>
-            <Link to={props.threads} target="_blank">
-              <FaSquareThreads className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
+            <Link to={props.instagram} target="_blank">
+              <FaInstagramSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
             </Link>
           </li>
           <li>
-            <Link to={props.snapChat} target="_blank">
-              <FaSnapchatSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
+            <Link to={props.linkedIn} target="_blank">
+              <FaLinkedin className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
+            </Link>
+          </li>
+          <li>
+            <Link to={props.youtube} target="_blank">
+              <FaYoutubeSquare className="h-8 w-8 text-gray-500 hover:text-primary transition-transform hover:scale-105 md:h-12 md:w-12" />
             </Link>
           </li>
         </ul>

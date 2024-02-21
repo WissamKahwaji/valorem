@@ -12,11 +12,14 @@ import { motion } from "framer-motion";
 import LoadingPage from "../loadingPage/LoadingPage";
 import { useGetAboutUsInfoQuery } from "../../api/about_us/queries";
 import AboutContentItem from "../../components/items/about_us/AboutContentItem";
+import { useNavigate } from "react-router-dom";
+
 const AboutUs = () => {
   const { data: aboutUsInfo, isLoading, isError } = useGetAboutUsInfoQuery();
+  const navigate = useNavigate();
   if (isLoading) return <LoadingPage />;
   if (isError) return <div></div>;
-  console.log(aboutUsInfo);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -34,6 +37,9 @@ const AboutUs = () => {
           subTitle={aboutUsInfo?.brief.title ?? ""}
           title="WHO WE ARE ?"
           description={aboutUsInfo?.brief.description ?? ""}
+          buttonOnClick={() => {
+            navigate("/contact-us");
+          }}
         />
         <Statistics />
         <div>
@@ -50,13 +56,13 @@ const AboutUs = () => {
         </div>
         <OurValues values={aboutUsInfo?.ourValues ?? []} />
         <BackgroundImage
-          minHeight={950}
+          minHeight={"min-h-[400px] md:min-h-[950px]"}
           url="https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg"
         />
         <OurTeam />
         <OurAgents />
         <BackgroundImage
-          minHeight={950}
+          minHeight={"min-h-[400px] md:min-h-[950px]"}
           url="https://i.imgur.com/MvnLNR6.jpg"
         />
         {/* <OurBrands /> */}

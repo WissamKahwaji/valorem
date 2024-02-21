@@ -7,4 +7,5 @@ export type Teams = {
   name: string;
   jobTitle: string;
   img: string;
+  brief: string;
 };

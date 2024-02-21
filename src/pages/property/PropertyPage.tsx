@@ -38,7 +38,7 @@ const PropertyPage = () => {
               image={property.img}
               location={property.location}
               description={property.description}
-              price={property.price}
+              price={property.breifDetails.at(3)?.value ?? "Call Us"}
               bathrooms={property.bathrooms}
               bedrooms={property.bedrooms}
               space={property.space}

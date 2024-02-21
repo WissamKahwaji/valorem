@@ -35,12 +35,15 @@ const Home = () => {
       />
       <Statistics />
       <BackgroundImage
-        minHeight={700}
-        url="https://www.sobharealty.com/media/yn2a4sbg/apartments_banner_desktop-1.webp?width=1920&height=944&rnd=133486536083530000"
+        minHeight={"min-h-[400px] md:min-h-[700px]"}
+        url="https://i.imgur.com/rVm3Jf6.jpeg"
       />
       <FeaturedSection />
       <PropertySection />
-      <BackgroundImage minHeight={700} url="https://i.imgur.com/MvnLNR6.jpg" />
+      <BackgroundImage
+        minHeight={"min-h-[400px] md:min-h-[700px]"}
+        url="https://i.imgur.com/B3cgZWd.png"
+      />
       <OurAgents />
       <ContactFooter />
     </motion.div>

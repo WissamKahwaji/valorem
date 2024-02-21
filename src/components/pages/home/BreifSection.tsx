@@ -1,5 +1,6 @@
 import React from "react";
 import InfoCard from "../../items/home/InfoCard";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   breif?: {
@@ -8,6 +9,7 @@ type Props = {
   };
 };
 const BreifSection = (props: Props) => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center items-start bg-seconBackground pb-20 pt-10 h-[500px] md:h-auto lg:h-screen">
       <div className="relative flex items-center mx-2">
@@ -21,7 +23,9 @@ const BreifSection = (props: Props) => {
           subtitle={props.breif?.title ?? ""}
           description={props.breif?.description ?? ""}
           buttonText="Get In Touch"
-          buttonOnClick={() => {}}
+          buttonOnClick={() => {
+            navigate("/contact-us");
+          }}
         />
       </div>
     </div>

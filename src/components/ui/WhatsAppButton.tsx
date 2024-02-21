@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-
-const WhatsAppButton = () => {
+type Props = {
+  number: string;
+};
+const WhatsAppButton = (props: Props) => {
   const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
 
   useEffect(() => {
@@ -22,8 +24,7 @@ const WhatsAppButton = () => {
   }, []);
 
   const openWhatsApp = () => {
-    // Replace the number with your WhatsApp number
-    window.open("https://wa.me/+971542451874", "_blank");
+    window.open(`https://wa.me/${props.number}`, "_blank");
   };
 
   return (

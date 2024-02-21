@@ -5,6 +5,7 @@ type FirstSectionProps = {
   subTitle: string;
   title: string;
   description: string;
+  buttonOnClick: () => void;
 };
 
 const FirstSection = (props: FirstSectionProps) => {
@@ -23,7 +24,7 @@ const FirstSection = (props: FirstSectionProps) => {
     <div className="relative flex flex-col">
       <div className="hidden lg:w-full h-64 md:h-64 lg:h-72 lg:bg-background lg:relative lg:flex "></div>
       <BackgroundImage
-        minHeight={550}
+        minHeight={"min-h-[400px] md:min-h-[550px]"}
         url="https://goldenbricks.ae/wp-content/uploads/2023/09/Exploring-the-Luxury-Real-Estate-Market-in-Dubai-A-Buyers-Perspective-Golden-Bricks-Real-Estate-01.jpg"
       />
 
@@ -40,7 +41,10 @@ const FirstSection = (props: FirstSectionProps) => {
               <p className="text-gray-700 my-2 md:my-4 text-xs md:text-sm lg:text-base text-start">
                 {props.description}
               </p>
-              <button className="bg-subTitle text-white px-6 md:px-10 py-2 md:py-3 rounded-md text-xs md:text-sm lg:text-base transition-all duration-300 ease-in-out transform hover:bg-primary hover:scale-110">
+              <button
+                className="bg-subTitle text-white px-6 md:px-10 py-2 md:py-3 rounded-md text-xs md:text-sm lg:text-base transition-all duration-300 ease-in-out transform hover:bg-primary hover:scale-110"
+                onClick={props.buttonOnClick}
+              >
                 Get In Touch
               </button>
             </div>

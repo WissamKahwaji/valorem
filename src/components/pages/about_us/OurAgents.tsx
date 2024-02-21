@@ -18,7 +18,7 @@ const OurAgents = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -26,7 +26,7 @@ const OurAgents = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           dots: true,
         },
       },
@@ -67,15 +67,24 @@ const OurAgents = () => {
           brands in Dubai and the United Arab Emirates, enabling us to offer our
           clients the finest options available in the market.
         </p>
-        <Slider {...settings} className="mx-14">
+        <Slider {...settings} className="mx-14 mt-3 py-8 gap-x-2">
           {ourAgentsInfo &&
             ourAgentsInfo.map((agent, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className="flex flex-col justify-center items-center"
+              >
                 <img
                   src={agent.logo}
                   alt={`Agent Logo ${index + 1}`}
-                  className="mx-auto w-32 h-32 object-contain "
+                  className="mx-auto w-72 h-40 object-contain "
                 />
+                <p className="text-base md:text-lg text-gray-500 font-header font-semibold uppercase">
+                  {agent.name}
+                </p>
+                <p className="text-sm text-gray-400 font-body text-center px-4">
+                  {agent.bio}
+                </p>
               </div>
             ))}
         </Slider>

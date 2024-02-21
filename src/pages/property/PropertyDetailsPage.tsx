@@ -4,7 +4,9 @@ import HeaderSection from "../../components/pages/property_page/HeaderSection";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaMapMarkerAlt } from "react-icons/fa";
+
+import { LiaAngleDoubleRightSolid } from "react-icons/lia";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IdParams } from "./type";
@@ -89,7 +91,8 @@ const PropertyDetailsPage = () => {
         img={property?.coverImg ?? ""}
         title={property?.name ?? ""}
         description={property?.bio ?? ""}
-        bottom="bottom-3"
+        bottom="bottom-0"
+        top="top-40"
       />
       <div className="bg-seconBackground py-8">
         <div className="flex flex-col justify-center items-center md:flex-row lg:flex-row lg:justify-center space-y-6 md:space-y-0 md:space-x-16">
@@ -252,11 +255,12 @@ const PropertyDetailsPage = () => {
                       key={detailIndex}
                       className="flex items-center p-3 my-2 border border-gray-200 rounded transform hover:scale-105 duration-300 ease-in-out"
                     >
-                      <img
+                      {/* <img
                         src={detail.icon}
                         alt={`Icon ${detailIndex}`}
                         className="w-9 h-9 mr-3"
-                      />
+                      /> */}
+                      <LiaAngleDoubleRightSolid className="w-6 h-6 mr-3 text-hoverColor" />
                       <p className="text-sm font-body font-thin">
                         {detail.title}
                       </p>

@@ -3,10 +3,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const HomeSlider = () => {
   const sliderImages = [
     {
+      id: "65bca4dd1256fdab99f69627",
       img: "https://i.imgur.com/Urn9Wv7.jpeg",
       name: "Como Residences",
       location: "Palm Jumeirah, Dubai – Nakheel",
@@ -15,6 +17,7 @@ const HomeSlider = () => {
       price: "AED 21M",
     },
     {
+      id: "65d0589f3cd97fbec9767f97",
       img: "https://i.imgur.com/OcxHEvy.jpeg",
       name: "Dubai Creek",
       location: "Palm Jumeirah, Dubai – Nakheel",
@@ -23,6 +26,7 @@ const HomeSlider = () => {
       price: "AED 1,381,000",
     },
     {
+      id: "65d06c083cd97fbec9767f98",
       img: "https://i.imgur.com/WdPTTxO.jpeg",
       name: "Beachgate By Address",
       location: "Dubai Harbour",
@@ -31,6 +35,7 @@ const HomeSlider = () => {
       price: "AED 2.97 M",
     },
     {
+      id: "65d093c51d6fcb0519ed1924",
       img: "https://i.imgur.com/m3e2PYA.jpeg",
       name: "Emaar Farm Gardens",
       location: "The Valley, Dubai",
@@ -113,6 +118,7 @@ const HomeSlider = () => {
       </div>
     );
   }
+  const navigate = useNavigate();
   return (
     <div className="w-full h-[540px] md:h-[740px] lg:h-[740px] xl:h-[740px] relative">
       <Slider {...settings} ref={sliderRef} className="w-full">
@@ -141,7 +147,12 @@ const HomeSlider = () => {
                     </p>
                   </div>
                   <div className="w-full md:w-2/3 flex flex-row ml-1 md:justify-end mt-2 md:mt-0 pr-4">
-                    <button className="px-2 sm:px-1 md:px-3 lg:px-5 py-1  bg-hoverColor border border-white rounded-lg hover:bg-white hover:text-hoverColor transition duration-300">
+                    <button
+                      className="px-2 sm:px-1 md:px-3 lg:px-5 py-1  bg-hoverColor border border-white rounded-lg hover:bg-white hover:text-hoverColor transition duration-300"
+                      onClick={() => {
+                        navigate(`/property-details/${item.id}`);
+                      }}
+                    >
                       <p className=" text-sm md:text-lg lg:text-2xl font-serif">
                         {item.price}
                       </p>
