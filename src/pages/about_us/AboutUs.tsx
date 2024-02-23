@@ -68,7 +68,7 @@ const AboutUs = () => {
         <OurTeam />
         <OurAgents />
         <BackgroundImage
-          minHeight={"min-h-[210px] md:min-h-[700px]"}
+          minHeight={"min-h-[300px] md:min-h-[700px]"}
           url="https://i.imgur.com/B3cgZWd.png"
         />
         {/* <OurBrands /> */}
