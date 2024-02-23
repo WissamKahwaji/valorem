@@ -1,13 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import IconWithText from "../../ui/IconWithText";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { useGetContactUsInfo } from "../../../api/contact_us/query";
+import baseUrl from "../../../constants/domain";
 
 const ContactFooter = () => {
   const { data: contactUsInfo } = useGetContactUsInfo();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+    try {
+      const response = await fetch(`${baseUrl}/contact/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.firstName + " " + formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+        alert("Your Enquery sent successfully!");
+      } else {
+        console.error("Failed to send email");
+        alert("Failed to send request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send request. Please try again.");
+    }
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "REGISTER YOUR INTEREST",
+    });
+  };
   return (
-    <div className="relative w-full h-[700px] md:h-[600px]  overflow-hidden">
+    <div className="relative w-full h-[500px] md:h-[500px]  overflow-hidden">
       <img
         src="https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg"
         alt="Background"
@@ -68,30 +121,50 @@ const ContactFooter = () => {
           </div>
 
           <div className="flex flex-col md:w-1/2">
-            <form action="" className="flex flex-col items-center space-y-4">
-              <input
-                type="text"
-                className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
-                placeholder="Email"
-              />
-              <input
-                type="text"
-                className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
-                placeholder="Phone Number"
-              />
-              <button className="p-2 w-full rounded-md bg-hoverColor text-white hover:bg-white hover:text-hoverColor">
-                Send Email
-              </button>
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-flow-row grid-cols-2 justify-start items-start gap-3">
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
+                  placeholder="First Name"
+                />
+                <input
+                  type="text"
+                  className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
+                  placeholder="Last Name"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  className="text-gray-500 rounded-md w-full p-4 mb-2 focus:border-hoverColor"
+                  placeholder="Phone Number"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex justify-center mt-4">
+                <button className="p-2 w-1/2 rounded-md bg-hoverColor text-white hover:bg-white hover:text-hoverColor">
+                  Send Email
+                </button>
+              </div>
             </form>
           </div>
         </div>
