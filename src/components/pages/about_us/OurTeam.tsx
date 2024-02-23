@@ -71,7 +71,7 @@ const OurTeam = () => {
                   <img
                     src={member.img}
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform transform scale-100 group-hover:scale-105"
+                    className="w-full h-full object-center transition-transform transform scale-100 group-hover:scale-105"
                   />
                 </div>
                 <div className="flex flex-col justify-start items-start space-y-5 w-full">

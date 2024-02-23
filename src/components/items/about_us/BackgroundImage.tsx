@@ -8,7 +8,7 @@ type BackgroundImageProps = {
 const BackgroundImage = (props: BackgroundImageProps) => {
   return (
     <div
-      className={`w-full bg-no-repeat bg-cover bg-fixed ${props.minHeight}`}
+      className={`w-full bg-contain bg-no-repeat md:bg-cover  md:bg-fixed ${props.minHeight}`}
       style={{
         backgroundImage: `url(${props.url})`,
       }}

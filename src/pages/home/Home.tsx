@@ -35,13 +35,13 @@ const Home = () => {
       />
       <Statistics />
       <BackgroundImage
-        minHeight={"min-h-[400px] md:min-h-[700px]"}
+        minHeight={"min-h-[220px] md:min-h-[700px]"}
         url="https://i.imgur.com/rVm3Jf6.jpeg"
       />
       <FeaturedSection />
       <PropertySection />
       <BackgroundImage
-        minHeight={"min-h-[400px] md:min-h-[700px]"}
+        minHeight={"min-h-[210px] md:min-h-[700px]"}
         url="https://i.imgur.com/B3cgZWd.png"
       />
       <OurAgents />

@@ -55,15 +55,21 @@ const AboutUs = () => {
           ))}
         </div>
         <OurValues values={aboutUsInfo?.ourValues ?? []} />
-        <BackgroundImage
-          minHeight={"min-h-[400px] md:min-h-[950px]"}
+        {/* <BackgroundImage
+          minHeight={"min-h-[200px] md:min-h-[950px]"}
           url="https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg"
-        />
+        /> */}
+        <div
+          className={`w-full bg-no-repeat bg-cover  bg-fixed min-h-[400px] md:min-h-[550px]`}
+          style={{
+            backgroundImage: `url(https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg)`,
+          }}
+        ></div>
         <OurTeam />
         <OurAgents />
         <BackgroundImage
-          minHeight={"min-h-[400px] md:min-h-[950px]"}
-          url="https://i.imgur.com/MvnLNR6.jpg"
+          minHeight={"min-h-[210px] md:min-h-[700px]"}
+          url="https://i.imgur.com/B3cgZWd.png"
         />
         {/* <OurBrands /> */}
         {/* <Reviews /> */}

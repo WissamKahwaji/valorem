@@ -215,11 +215,6 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to={contactUsInfo?.content.faceBook ?? "/"} target="_blank">
-                <FaFacebookSquare className="h-8 w-8" />
-              </Link>
-            </li>
-            <li>
               <Link
                 to={contactUsInfo?.content.instagram ?? "/"}
                 target="_blank"
@@ -227,6 +222,12 @@ const Footer = () => {
                 <FaInstagramSquare className="h-8 w-8" />
               </Link>
             </li>
+            <li>
+              <Link to={contactUsInfo?.content.faceBook ?? "/"} target="_blank">
+                <FaFacebookSquare className="h-8 w-8" />
+              </Link>
+            </li>
+
             <li>
               <Link to={contactUsInfo?.content.youtube ?? "/"} target="_blank">
                 <FaYoutubeSquare className="h-8 w-8" />

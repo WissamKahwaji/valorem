@@ -23,10 +23,16 @@ const FirstSection = (props: FirstSectionProps) => {
   return (
     <div className="relative flex flex-col">
       <div className="hidden lg:w-full h-64 md:h-64 lg:h-72 lg:bg-background lg:relative lg:flex "></div>
-      <BackgroundImage
+      {/* <BackgroundImage
         minHeight={"min-h-[400px] md:min-h-[550px]"}
         url="https://goldenbricks.ae/wp-content/uploads/2023/09/Exploring-the-Luxury-Real-Estate-Market-in-Dubai-A-Buyers-Perspective-Golden-Bricks-Real-Estate-01.jpg"
-      />
+      /> */}
+      <div
+        className={`w-full bg-no-repeat bg-cover  bg-fixed min-h-[400px] md:min-h-[550px]`}
+        style={{
+          backgroundImage: `url(https://goldenbricks.ae/wp-content/uploads/2023/09/Exploring-the-Luxury-Real-Estate-Market-in-Dubai-A-Buyers-Perspective-Golden-Bricks-Real-Estate-01.jpg)`,
+        }}
+      ></div>
 
       <div className="relative ">
         <div className="absolute bottom-1/2 md:bottom-1/2 lg:bottom-40 lg:left-1/2 transform lg:-translate-x-3/4 -translate-y-1/2 md:-translate-y-1/2   lg:-translate-y-1/2 lg:flex lg:flex-row lg:justify-start lg:items-start flex flex-col-reverse ">

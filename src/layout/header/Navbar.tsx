@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  AiFillCloseCircle,
-  AiFillCloseSquare,
-  AiOutlineClose,
-  AiOutlineCloseSquare,
-  AiOutlineMenu,
-} from "react-icons/ai";
+import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
 import {
   FaFacebook,
-  FaTwitter,
   FaInstagram,
   FaEnvelope,
   FaPhoneAlt,
@@ -24,8 +17,9 @@ const Navbar = () => {
   const currentPath = location.pathname;
 
   const socialMediaIcons = [
-    { icon: <FaFacebook />, link: contactUsInfo?.content.faceBook },
     { icon: <FaInstagram />, link: contactUsInfo?.content.instagram },
+    { icon: <FaFacebook />, link: contactUsInfo?.content.faceBook },
+
     { icon: <FaYoutube />, link: contactUsInfo?.content.youtube },
   ];
 
@@ -108,7 +102,7 @@ const Navbar = () => {
         </div>
         {showDrawer && (
           <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 flex flex-row w-full">
-            <div className=" bg-primary bg-opacity-80 z-[1002] transition  duration-300 transform translate-x-0 w-[85%]">
+            <div className=" bg-primary bg-opacity-80 z-[1002] transition  duration-300 transform translate-x-0 w-[75%]">
               <div className="flex flex-col items-start mx-2 space-y-4 py-8">
                 <div className="mb-5">
                   <LanguageButton />
@@ -159,12 +153,12 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <div className="h-[60px] w-[15%] bg-transparent flex justify-center items-center">
+            <div className="h-[60px] w-[15%] bg-transparent flex justify-center items-center ml-3">
               <button
                 onClick={toggleDrawer}
                 className="text-white text-lg focus:outline-none"
               >
-                <AiOutlineCloseSquare className="text-3xl text-hoverColor" />
+                <AiOutlineCloseSquare className="text-4xl text-hoverColor" />
               </button>
             </div>
           </div>
