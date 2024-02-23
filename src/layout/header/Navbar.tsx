@@ -101,7 +101,7 @@ const Navbar = () => {
           </button>
         </div>
         {showDrawer && (
-          <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 flex flex-row w-full">
+          <div className="md:hidden fixed inset-0 bg-transparent bg-opacity-90 flex flex-row w-full backdrop-filter backdrop-blur-sm">
             <div className=" bg-primary bg-opacity-80 z-[1002] transition  duration-300 transform translate-x-0 w-[75%]">
               <div className="flex flex-col items-start mx-2 space-y-4 py-8">
                 <div className="mb-5">
@@ -153,12 +153,12 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <div className="h-[60px] w-[15%] bg-transparent flex justify-center items-center ml-3">
+            <div className="h-[60px] w-[15%] bg-transparent flex justify-center items-center ml-6 mt-3">
               <button
                 onClick={toggleDrawer}
                 className="text-white text-lg focus:outline-none"
               >
-                <AiOutlineCloseSquare className="text-4xl text-hoverColor" />
+                <AiOutlineCloseSquare className="text-6xl text-hoverColor" />
               </button>
             </div>
           </div>
