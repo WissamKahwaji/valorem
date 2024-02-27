@@ -4,7 +4,6 @@ import BreifSection from "../../components/pages/home/BreifSection";
 import PropertySection from "../../components/pages/home/PropertySection";
 import Statistics from "../../components/pages/about_us/Statistics";
 import BackgroundImage from "../../components/items/about_us/BackgroundImage";
-import PropertySlider from "../../components/items/home/PropertySlider";
 import FeaturedSection from "../../components/pages/home/FeaturedSection";
 import AboutContentItem from "../../components/items/about_us/AboutContentItem";
 import OurAgents from "../../components/pages/about_us/OurAgents";
@@ -12,6 +11,7 @@ import OurAgents from "../../components/pages/about_us/OurAgents";
 import ContactFooter from "../../components/items/home/ContactFooter";
 import { motion } from "framer-motion";
 import { useGetAboutUsInfoQuery } from "../../api/about_us/queries";
+import InterPropertySection from "../../components/pages/home/InterPropertySection";
 
 const Home = () => {
   const { data: aboutUsInfo } = useGetAboutUsInfoQuery();
@@ -44,6 +44,7 @@ const Home = () => {
         minHeight={"min-h-[300px] md:min-h-[700px]"}
         url="https://i.imgur.com/B3cgZWd.png"
       />
+      <InterPropertySection />
       <OurAgents />
       <ContactFooter />
     </motion.div>

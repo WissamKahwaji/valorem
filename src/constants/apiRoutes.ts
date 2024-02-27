@@ -31,6 +31,13 @@ const PROPERTY = {
   },
 };
 
+const INTERPROPERTY = {
+  GET: {
+    All: "/propertyInter",
+    BY_ID: (id: string | undefined) => `/propertyInter/${id}`,
+  },
+};
+
 const API_ROUTES = {
   CONTACT_US,
   ABOUT_US,
@@ -39,5 +46,6 @@ const API_ROUTES = {
   OUR_SERVICES,
   STATISTICS,
   PROPERTY,
+  INTERPROPERTY,
 };
 export default API_ROUTES;

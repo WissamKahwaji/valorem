@@ -13,6 +13,7 @@ import ServicesPage from "./pages/services/ServicesPage";
 import ContactUs from "./pages/contact_us/ContactUs";
 import PropertyDetailsPage from "./pages/property/PropertyDetailsPage";
 import LoadingPage from "./pages/loadingPage/LoadingPage";
+import InterPropertyDetailsPage from "./pages/property/InterPropertyDetailsPage";
 
 const Routes = () => {
   const router = createBrowserRouter(
@@ -22,11 +23,17 @@ const Routes = () => {
         <Route path={"about-us"} element={<AboutUs />} />
         <Route path={"contact-us"} element={<ContactUs />} />
         <Route path={"properties"} element={<PropertyPage />} />
+        <Route path={"uae-properties"} element={<PropertyPage />} />
+        <Route path={"international-properties"} element={<PropertyPage />} />
         <Route
           path={"property-details/:id"}
           element={<PropertyDetailsPage />}
         />
-
+        <Route path={"international-properties"} element={<PropertyPage />} />
+        <Route
+          path={"international-properties/:id"}
+          element={<InterPropertyDetailsPage />}
+        />
         <Route path={"services"} element={<ServicesPage />} />
       </Route>
     )

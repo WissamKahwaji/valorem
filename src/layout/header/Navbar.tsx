@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
+import {
+  AiOutlineCloseSquare,
+  AiOutlineMenu,
+  AiOutlineDown,
+} from "react-icons/ai";
 import {
   FaFacebook,
   FaInstagram,
@@ -19,22 +23,26 @@ const Navbar = () => {
   const socialMediaIcons = [
     { icon: <FaInstagram />, link: contactUsInfo?.content.instagram },
     { icon: <FaFacebook />, link: contactUsInfo?.content.faceBook },
-
     { icon: <FaYoutube />, link: contactUsInfo?.content.youtube },
   ];
 
   const navItems = [
     { title: "Home", path: "/" },
-    { title: "Properties", path: "/properties" },
+    { title: "Properties", path: "/properties", hasDropdown: true },
     { title: "Services", path: "/services" },
     { title: "About Us", path: "/about-us" },
     { title: "Contact Us", path: "/contact-us" },
   ];
 
   const [showDrawer, setShowDrawer] = useState(false);
+  const [showPropertiesDropdown, setShowPropertiesDropdown] = useState(false);
 
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
+  };
+
+  const togglePropertiesDropdown = () => {
+    setShowPropertiesDropdown(!showPropertiesDropdown);
   };
 
   return (
@@ -165,15 +173,66 @@ const Navbar = () => {
         )}
         <div className="hidden md:flex items-center space-x-8 md:justify-center ">
           {navItems.map((item, index) => (
-            <Link
-              key={index}
-              to={item.path}
-              className={`text-primary font-header  hover:text-hoverColor transition duration-300 text-lg ${
-                item.path === currentPath ? "border-b-2 border-hoverColor" : ""
-              }`}
-            >
-              {item.title}
-            </Link>
+            <div key={index} className="relative">
+              {item.hasDropdown ? (
+                <div>
+                  <button
+                    onClick={togglePropertiesDropdown}
+                    className={`flex items-center text-primary font-header hover:text-hoverColor transition duration-300 text-lg ${
+                      item.path === currentPath
+                        ? "border-b-2 border-hoverColor"
+                        : ""
+                    }`}
+                  >
+                    {item.title}
+                    <AiOutlineDown
+                      className={`ml-1 transition duration-300 transform ${
+                        showPropertiesDropdown ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {showPropertiesDropdown && (
+                    <div
+                      className="absolute top-full left-0 z-[1000] bg-white shadow-md rounded-md mt-1"
+                      onClick={togglePropertiesDropdown}
+                    >
+                      <Link
+                        to="/properties"
+                        state={{ type: "all" }}
+                        className="block  font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase"
+                      >
+                        All Properties
+                      </Link>
+                      <Link
+                        to="/uae-properties"
+                        state={{ type: "uae" }}
+                        className="block px-4 font-header py-2 text-gray-800 hover:bg-gray-200 uppercase"
+                      >
+                        UAE Properties
+                      </Link>
+                      <Link
+                        to="/international-properties"
+                        state={{ type: "international" }}
+                        className="block font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase"
+                      >
+                        International Properties
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  to={item.path}
+                  className={`text-primary font-header hover:text-hoverColor transition duration-300 text-lg ${
+                    item.path === currentPath
+                      ? "border-b-2 border-hoverColor"
+                      : ""
+                  }`}
+                >
+                  {item.title}
+                </Link>
+              )}
+            </div>
           ))}
         </div>
       </nav>

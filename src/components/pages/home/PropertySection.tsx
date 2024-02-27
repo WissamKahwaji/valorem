@@ -32,6 +32,7 @@ const PropertySection = () => {
               bathrooms={property.bedrooms}
               bedrooms={property.bathrooms}
               space={property.space}
+              linkTo={`/property-details/${property._id}`}
             />
           ))}
       </div>

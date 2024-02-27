@@ -9,14 +9,15 @@ type PropertyProps = {
   price: string;
   location: string;
   description: string;
-  bedrooms: number;
-  bathrooms: number;
-  space: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  space?: string;
+  linkTo: string;
 };
 
 const PropertyCard = (props: PropertyProps) => {
   return (
-    <Link to={`/property-details/${props.id}`}>
+    <Link to={props.linkTo}>
       <div
         key={props.id}
         className="h-[565px] md:h-[615px] lg:h-[630px] bg-white shadow-md rounded-lg overflow-hidden   duration-300 ease-in-out transform hover:scale-105"
@@ -44,24 +45,30 @@ const PropertyCard = (props: PropertyProps) => {
           </p>
           <div className="flex flex-col justify-between items-center">
             <div className="flex flex-col  lg:flex-row justify-center md:justify-between lg:justify-between w-full mb-2 md:mb-5 lg:mb-10">
-              <div className="flex items-center">
-                <FaBed className="text-subTitle mr-1" />
-                <p className="text-sm text-gray-600 font-body font-semibold">
-                  Bedrooms: {props.bedrooms}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <FaBath className="text-subTitle mr-1" />
-                <p className="text-sm text-gray-600 font-body font-semibold">
-                  Bathrooms: {props.bathrooms}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <FaRuler className="text-subTitle mr-1" />
-                <p className="text-sm text-gray-600 font-body font-semibold">
-                  Space: {props.space}
-                </p>
-              </div>
+              {props.bedrooms && (
+                <div className="flex items-center">
+                  <FaBed className="text-subTitle mr-1" />
+                  <p className="text-sm text-gray-600 font-body font-semibold">
+                    Bedrooms: {props.bedrooms}
+                  </p>
+                </div>
+              )}
+              {props.bathrooms && (
+                <div className="flex items-center">
+                  <FaBath className="text-subTitle mr-1" />
+                  <p className="text-sm text-gray-600 font-body font-semibold">
+                    Bathrooms: {props.bathrooms}
+                  </p>
+                </div>
+              )}
+              {props.space && (
+                <div className="flex items-center">
+                  <FaRuler className="text-subTitle mr-1" />
+                  <p className="text-sm text-gray-600 font-body font-semibold">
+                    Space: {props.space}
+                  </p>
+                </div>
+              )}
             </div>
             <hr className="w-full border-t border-gray-300 mb-3" />
             <button className="bg-subTitle w-full border border-white hover:border-subTitle hover:bg-primary text-white px-4 py-2 rounded-md text-sm transition-colors duration-300 ease-in-out">
