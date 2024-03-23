@@ -1,12 +1,13 @@
 import React from "react";
 import { FaBath, FaBed, FaMapMarkerAlt, FaRuler } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { formatPrice } from "../../utils";
 
 type PropertyProps = {
   id: string;
   image: string;
   name: string;
-  price: string;
+  price: number;
   location: string;
   description: string;
   bedrooms?: number;
@@ -28,7 +29,7 @@ const PropertyCard = (props: PropertyProps) => {
           className="w-full h-40 lg:h-64 object-cover"
         />
         <div className="bg-primary  py-2 px-4 text-white font-body font-bold text-xl">
-          {props.price}
+          {props.price > 0 ? `${formatPrice(props.price)} AED` : "Call Us"}
         </div>
         <div className="p-4 h-14  text-center">
           <h2 className="text-lg md:text-lg  md:h-28 lg:h-14 font-semibold font-header mb-1">

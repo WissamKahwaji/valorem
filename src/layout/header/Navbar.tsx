@@ -3,6 +3,7 @@ import {
   AiOutlineCloseSquare,
   AiOutlineMenu,
   AiOutlineDown,
+  AiOutlineRight,
 } from "react-icons/ai";
 import {
   FaFacebook,
@@ -28,21 +29,98 @@ const Navbar = () => {
 
   const navItems = [
     { title: "Home", path: "/" },
-    { title: "Properties", path: "/properties", hasDropdown: true },
+    {
+      title: "Properties",
+      path: "/properties",
+      hasDropdown: true,
+      dropdownItems: [
+        {
+          title: "All Properties",
+          path: "/properties/all",
+          state: { type: "all" },
+        },
+        {
+          title: "UAE Properties",
+          path: "/properties/uae",
+          state: { type: "uae" },
+          hasDropdown: true,
+          dropdownItems: [
+            {
+              title: "Commercial Projects",
+              path: "/properties/uae?propertyType=commercial",
+            },
+            {
+              title: "Residential Projects",
+              path: "/properties/uae?propertyType=residential",
+              hasDropdown: true,
+              dropdownItems: [
+                {
+                  title: "Off Plan Projects",
+                  path: "/properties/uae?propertyType=residential&propertySubType=off plan",
+                },
+                {
+                  title: "Secondary Projects",
+                  path: "/properties/uae?propertyType=residential&propertySubType=secondary projects",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: "International Properties",
+          path: "/properties/international",
+          state: { type: "international" },
+          hasDropdown: true,
+          dropdownItems: [
+            {
+              title: "Commercial Projects",
+              path: "/properties/international?propertyType=commercial",
+            },
+            {
+              title: "Residential Projects",
+              path: "/properties/international?propertyType=residential",
+              hasDropdown: true,
+              dropdownItems: [
+                {
+                  title: "Off Plan Projects",
+                  path: "/properties/international?propertyType=residential&propertySubType=off plan",
+                },
+                {
+                  title: "Secondary Projects",
+                  path: "/properties/international?propertyType=residential&propertySubType=secondary projects",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     { title: "Services", path: "/services" },
     { title: "About Us", path: "/about-us" },
     { title: "Contact Us", path: "/contact-us" },
   ];
 
   const [showDrawer, setShowDrawer] = useState(false);
-  const [showPropertiesDropdown, setShowPropertiesDropdown] = useState(false);
-
+  const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+  const [subDropdownIndex, setSubDropdownIndex] = useState<number | null>(null);
+  const [subsubDropdownIndex, setSubSubDropdownIndex] = useState<number | null>(
+    null
+  );
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
-  const togglePropertiesDropdown = () => {
-    setShowPropertiesDropdown(!showPropertiesDropdown);
+  const toggleDropdown = (index: number) => {
+    setDropdownIndex(dropdownIndex === index ? null : index);
+    setSubDropdownIndex(null);
+  };
+
+  const toggleSubDropdown = (index: number) => {
+    setSubDropdownIndex(subDropdownIndex === index ? null : index);
+  };
+
+  const toggleSubSubDropdown = (index: number) => {
+    setSubSubDropdownIndex(subsubDropdownIndex === index ? null : index);
   };
 
   return (
@@ -103,7 +181,7 @@ const Navbar = () => {
           </div>
           <button
             onClick={toggleDrawer}
-            className="md:hidden  text-gray-700 hover:text-hoverColor transition duration-300 text-2xl focus:outline-none"
+            className="md:hidden  text-primary hover:text-hoverColor transition duration-300 text-2xl focus:outline-none"
           >
             <AiOutlineMenu />
           </button>
@@ -116,13 +194,140 @@ const Navbar = () => {
                   <LanguageButton />
                 </div>
                 {navItems.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.path}
-                    className="text-white hover:text-hoverColor transition duration-300 text-lg border-b-2 w-full border-b-hoverColor/50"
-                  >
-                    {item.title}
-                  </a>
+                  <div key={index} className="w-full">
+                    {item.hasDropdown ? (
+                      <div>
+                        <button
+                          onClick={() => toggleDropdown(index)}
+                          className={`flex flex-row justify-start items-center border-b-2 w-full border-b-hoverColor/50 font-header px-4 py-2 text-white  uppercase  `}
+                        >
+                          {item.title}
+                          <AiOutlineDown
+                            className={`ml-1 transition duration-300 transform ${
+                              dropdownIndex === index ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        {dropdownIndex === index && (
+                          <div className="pl-8">
+                            {item.dropdownItems.map(
+                              (dropdownItem, dropdownIndex) => (
+                                <div key={dropdownIndex}>
+                                  {dropdownItem.hasDropdown ? (
+                                    <div>
+                                      <button
+                                        onClick={() =>
+                                          toggleSubDropdown(dropdownIndex)
+                                        }
+                                        className={`flex flex-row text-start items-center  font-header   py-2 text-gray-200  uppercase `}
+                                      >
+                                        {dropdownItem.title}
+                                        <AiOutlineDown
+                                          className={`ml-1 transition duration-300 transform ${
+                                            subDropdownIndex === dropdownIndex
+                                              ? "rotate-180"
+                                              : ""
+                                          }`}
+                                        />
+                                      </button>
+                                      {subDropdownIndex === dropdownIndex && (
+                                        <div className="pl-4">
+                                          {dropdownItem.dropdownItems.map(
+                                            (
+                                              subDropdownItem,
+                                              subDropdownIndex
+                                            ) =>
+                                              subDropdownItem.hasDropdown ? (
+                                                <>
+                                                  <button
+                                                    onClick={() =>
+                                                      toggleSubSubDropdown(
+                                                        subDropdownIndex
+                                                      )
+                                                    }
+                                                    className={`flex flex-row justify-center items-center font-header  py-2 text-gray-200  uppercase `}
+                                                  >
+                                                    {subDropdownItem.title}
+                                                    <AiOutlineDown
+                                                      className={`ml-1 transition duration-300 transform ${
+                                                        subDropdownIndex ===
+                                                        subsubDropdownIndex
+                                                          ? "rotate-180"
+                                                          : ""
+                                                      }`}
+                                                    />
+                                                  </button>
+                                                  {subDropdownIndex ===
+                                                    subsubDropdownIndex &&
+                                                    subDropdownItem.dropdownItems.map(
+                                                      (item, index) => (
+                                                        <Link
+                                                          onClick={toggleDrawer}
+                                                          to={item.path}
+                                                          className={`block font-header px-4 py-2 text-gray-200   uppercase ${
+                                                            item.path ===
+                                                            currentPath
+                                                              ? "bg-hoverColor/20"
+                                                              : ""
+                                                          }`}
+                                                        >
+                                                          {item.title}
+                                                        </Link>
+                                                      )
+                                                    )}
+                                                </>
+                                              ) : (
+                                                <>
+                                                  <Link
+                                                    onClick={toggleDrawer}
+                                                    to={subDropdownItem.path}
+                                                    className={`block font-header  py-2 text-gray-200   uppercase ${
+                                                      subDropdownItem.path ===
+                                                      currentPath
+                                                        ? "bg-hoverColor/20"
+                                                        : ""
+                                                    }`}
+                                                  >
+                                                    {subDropdownItem.title}
+                                                  </Link>
+                                                </>
+                                              )
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <Link
+                                      onClick={toggleDrawer}
+                                      to={dropdownItem.path}
+                                      state={dropdownItem.state}
+                                      className={`block font-header  py-2 text-gray-200   uppercase ${
+                                        dropdownItem.path === currentPath
+                                          ? "bg-hoverColor/20"
+                                          : ""
+                                      }`}
+                                    >
+                                      {dropdownItem.title}
+                                    </Link>
+                                  )}
+                                </div>
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        onClick={toggleDrawer}
+                        to={item.path}
+                        className={`block font-header border-b-2 w-full border-b-hoverColor/50 px-4 py-2 text-white hover:bg-hoverColor uppercase ${
+                          item.path === currentPath ? "bg-hoverColor/20" : ""
+                        }`}
+                      >
+                        {item.title}
+                      </Link>
+                    )}
+                  </div>
                 ))}
                 <div className="flex flex-col space-y-4">
                   <div
@@ -177,7 +382,7 @@ const Navbar = () => {
               {item.hasDropdown ? (
                 <div>
                   <button
-                    onClick={togglePropertiesDropdown}
+                    onClick={() => toggleDropdown(index)}
                     className={`flex items-center text-primary font-header hover:text-hoverColor transition duration-300 text-lg ${
                       item.path === currentPath
                         ? "border-b-2 border-hoverColor"
@@ -187,36 +392,122 @@ const Navbar = () => {
                     {item.title}
                     <AiOutlineDown
                       className={`ml-1 transition duration-300 transform ${
-                        showPropertiesDropdown ? "rotate-180" : ""
+                        dropdownIndex === index ? "rotate-180" : ""
                       }`}
                     />
                   </button>
-                  {showPropertiesDropdown && (
-                    <div
-                      className="absolute top-full left-0 z-[1000] bg-white shadow-md rounded-md mt-1"
-                      onClick={togglePropertiesDropdown}
-                    >
-                      <Link
-                        to="/properties"
-                        state={{ type: "all" }}
-                        className="block  font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase"
-                      >
-                        All Properties
-                      </Link>
-                      <Link
-                        to="/uae-properties"
-                        state={{ type: "uae" }}
-                        className="block px-4 font-header py-2 text-gray-800 hover:bg-gray-200 uppercase"
-                      >
-                        UAE Properties
-                      </Link>
-                      <Link
-                        to="/international-properties"
-                        state={{ type: "international" }}
-                        className="block font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase"
-                      >
-                        International Properties
-                      </Link>
+                  {dropdownIndex === index && (
+                    <div className="absolute top-full left-full md:left-0 z-[1000] bg-white shadow-md rounded-md mt-1 md:mt-0 md:ml-1">
+                      {item.dropdownItems.map((dropdownItem, dropdownIndex) => (
+                        <div key={dropdownIndex}>
+                          {dropdownItem.hasDropdown ? (
+                            <div className="">
+                              <button
+                                onClick={() => toggleSubDropdown(dropdownIndex)}
+                                className={`flex flex-row text-start justify-center items-center font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                  dropdownItem.path === currentPath
+                                    ? "bg-gray-200"
+                                    : ""
+                                }`}
+                              >
+                                {dropdownItem.title}{" "}
+                                <AiOutlineRight
+                                  className={`ml-1 transition duration-300 transform ${
+                                    subDropdownIndex === dropdownIndex
+                                      ? "rotate-180"
+                                      : ""
+                                  }`}
+                                />
+                              </button>
+
+                              {subDropdownIndex === dropdownIndex && (
+                                <div className=" md:absolute md:left-full md:top-14 z-[1001] bg-white shadow-md rounded-md mt-2  mx-1">
+                                  {dropdownItem.dropdownItems.map(
+                                    (subDropdownItem, subDropdownIndex) =>
+                                      subDropdownItem.hasDropdown ? (
+                                        <>
+                                          <button
+                                            onClick={() =>
+                                              toggleSubSubDropdown(
+                                                subDropdownIndex
+                                              )
+                                            }
+                                            className={`flex flex-row text-start justify-center items-center font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                              subDropdownIndex ===
+                                              subsubDropdownIndex
+                                                ? "bg-gray-200"
+                                                : ""
+                                            }`}
+                                          >
+                                            {subDropdownItem.title}
+                                            <AiOutlineDown
+                                              className={`ml-1 transition duration-300 transform ${
+                                                subDropdownIndex ===
+                                                subsubDropdownIndex
+                                                  ? "rotate-180"
+                                                  : ""
+                                              }`}
+                                            />
+                                          </button>
+                                          {subDropdownIndex ===
+                                            subsubDropdownIndex &&
+                                            subDropdownItem.dropdownItems.map(
+                                              (item, index) => (
+                                                <Link
+                                                  onClick={() => {
+                                                    toggleDropdown(index);
+                                                  }}
+                                                  to={item.path}
+                                                  className={`md:flex md:left-full md:top-16 font-header px-4 py-2 text-gray-800 bg-white hover:bg-gray-200  uppercase ${
+                                                    item.path === currentPath
+                                                      ? "bg-gray-300"
+                                                      : ""
+                                                  }`}
+                                                >
+                                                  {item.title}
+                                                </Link>
+                                              )
+                                            )}
+                                        </>
+                                      ) : (
+                                        <>
+                                          <Link
+                                            onClick={() => {
+                                              toggleDropdown(index);
+                                            }}
+                                            key={subDropdownIndex}
+                                            to={subDropdownItem.path}
+                                            className={`block font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                              subDropdownItem.path ===
+                                              currentPath
+                                                ? "bg-gray-200"
+                                                : ""
+                                            }`}
+                                          >
+                                            {subDropdownItem.title}
+                                          </Link>
+                                        </>
+                                      )
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <Link
+                              onClick={() => toggleDropdown(index)}
+                              to={dropdownItem.path}
+                              state={dropdownItem.state}
+                              className={`block  font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                dropdownItem.path === currentPath
+                                  ? "bg-gray-200"
+                                  : ""
+                              }`}
+                            >
+                              {dropdownItem.title}
+                            </Link>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

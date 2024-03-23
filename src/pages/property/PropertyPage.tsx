@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderSection from "../../components/pages/property_page/HeaderSection";
 // import FilterBox from "../../components/items/property_page/FilterBox";
 import PropertyCard from "../../components/ui/PropertyCard";
 import { motion } from "framer-motion";
 import { useGetPropertiesInfoQuery } from "../../api/properties/queries";
 import { useGetInterPropertiesInfoQuery } from "../../api/inter_property/queries";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { PropertyPathParams } from "./type";
+import { PropertyInfo } from "../../api/properties/type";
+import { InterPropertyInfo } from "../../api/inter_property/type";
 const PropertyPage = () => {
+  const { propertyLocation } = useParams<PropertyPathParams>();
+  const tt = propertyLocation ?? "all";
   const location = useLocation();
-  const { type } = location.state;
-  console.log(type);
-  const { data: propertyInfo } = useGetPropertiesInfoQuery();
-  const { data: interPropertyInfo } = useGetInterPropertiesInfoQuery();
+  const [searchParams] = useSearchParams();
+  const [properties, setProperties] = useState<PropertyInfo[]>([]);
+  const [Interproperties, setInterProperties] = useState<InterPropertyInfo[]>(
+    []
+  );
+
+  const type = searchParams.get("propertyType");
+  const subtype = searchParams.get("propertySubType");
+
+  const propertyQuery = {
+    type: type,
+    subType: subtype,
+  };
+  const { data: propertyInfo, refetch: refetchProperties } =
+    useGetPropertiesInfoQuery(propertyQuery);
+  const { data: interPropertyInfo, refetch: refetchInterProperties } =
+    useGetInterPropertiesInfoQuery(propertyQuery);
+
+  useEffect(() => {
+    if (propertyInfo) {
+      setProperties(propertyInfo);
+    }
+    if (interPropertyInfo) {
+      setInterProperties(interPropertyInfo);
+    }
+  }, [interPropertyInfo, propertyInfo]);
+  useEffect(() => {
+    const cleanup = () => {};
+
+    refetchProperties({});
+    refetchInterProperties({});
+
+    return cleanup;
+  }, [location.search, refetchInterProperties, refetchProperties]);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -33,15 +68,15 @@ const PropertyPage = () => {
         </p>
         {/* <FilterBox /> */}
       </div>
-      {type === "all" || type === "uae" ? (
+      {tt === "all" || tt === "uae" ? (
         <div className="bg-background">
           <div className="mx-8 md:mx-16 lg:mx-24 flex flex-col ">
             <p className="mb-10 mt-10 font-header font-semibold text-hoverColor text-3xl">
               UAE Properties
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8  mb-10">
-              {propertyInfo &&
-                propertyInfo.map(property => (
+              {properties &&
+                properties.map(property => (
                   <PropertyCard
                     key={property._id} // Don't forget to add a unique key prop
                     id={property._id}
@@ -49,7 +84,7 @@ const PropertyPage = () => {
                     image={property.img}
                     location={property.location}
                     description={property.description}
-                    price={property.breifDetails.at(3)?.value ?? "Call Us"}
+                    price={property.price}
                     bathrooms={property.bathrooms}
                     bedrooms={property.bedrooms}
                     space={property.space}
@@ -60,15 +95,15 @@ const PropertyPage = () => {
           </div>
         </div>
       ) : null}
-      {type === "all" || type === "international" ? (
+      {tt === "all" || tt === "international" ? (
         <div className="bg-seconBackground">
           <div className="mx-8 pt-14 md:mx-16 lg:mx-24 flex flex-col">
             <p className="mb-10 font-header font-semibold text-primary text-3xl capitalize">
               international Properties
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8  mb-10">
-              {interPropertyInfo &&
-                interPropertyInfo.map((interProperty, index) => (
+              {Interproperties &&
+                Interproperties.map((interProperty, index) => (
                   <PropertyCard
                     key={interProperty._id} // Don't forget to add a unique key prop
                     id={interProperty._id}
@@ -76,7 +111,7 @@ const PropertyPage = () => {
                     image={interProperty.img}
                     location={interProperty.location}
                     description={interProperty.description}
-                    price={"Call Us"}
+                    price={interProperty.price}
                     linkTo={`/international-properties/${interProperty._id}`}
                   />
                 ))}

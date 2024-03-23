@@ -6,10 +6,10 @@ import {
   getPropertyInfo,
 } from ".";
 
-const useGetPropertiesInfoQuery = () =>
+const useGetPropertiesInfoQuery = (queryParams?: Record<string, any>) =>
   useQuery({
     queryKey: ["properties-info"],
-    queryFn: () => getPropertyInfo(),
+    queryFn: () => getPropertyInfo(queryParams),
   });
 const useGetPropertiesInfoByIdQuery = (id: string | undefined) =>
   useQuery({

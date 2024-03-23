@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getInterPropertyById, getInterPropertyInfo } from ".";
 
-const useGetInterPropertiesInfoQuery = () =>
+const useGetInterPropertiesInfoQuery = (queryParams?: Record<string, any>) =>
   useQuery({
     queryKey: ["inter-properties-info"],
-    queryFn: () => getInterPropertyInfo(),
+    queryFn: () => getInterPropertyInfo(queryParams),
   });
 const useGetInterPropertiesInfoByIdQuery = (id: string | undefined) =>
   useQuery({

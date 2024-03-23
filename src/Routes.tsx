@@ -22,9 +22,13 @@ const Routes = () => {
         <Route index element={<Home />} />
         <Route path={"about-us"} element={<AboutUs />} />
         <Route path={"contact-us"} element={<ContactUs />} />
+        <Route
+          path={"properties/:propertyLocation"}
+          element={<PropertyPage />}
+        />
         <Route path={"properties"} element={<PropertyPage />} />
-        <Route path={"uae-properties"} element={<PropertyPage />} />
-        <Route path={"international-properties"} element={<PropertyPage />} />
+        {/* <Route path={"uae-properties"} element={<PropertyPage />} />
+        <Route path={"international-properties"} element={<PropertyPage />} /> */}
         <Route
           path={"property-details/:id"}
           element={<PropertyDetailsPage />}

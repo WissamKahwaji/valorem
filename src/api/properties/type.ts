@@ -9,6 +9,8 @@ export type PropertyInfo = {
   price: number;
   propertyType: string;
   propertyContent: PropertyContent[];
+  type: typeProperty;
+  subType: subTypeProperty;
   gallery: [string];
   bedrooms: number;
   bathrooms: number;
@@ -43,3 +45,13 @@ export type PropertyContent = {
   ];
   imgs: [string];
 };
+
+export enum typeProperty {
+  COMMERCIAL = "commercial",
+  RESIDENTIAL = "residential",
+}
+
+export enum subTypeProperty {
+  OFF_PLAN = "off plan",
+  SECONDARY = "secondary projects",
+}

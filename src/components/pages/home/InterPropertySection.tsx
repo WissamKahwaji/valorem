@@ -25,7 +25,7 @@ const InterPropertySection = () => {
               image={property.img}
               location={property.location}
               description={property.description}
-              price={"Call Us"}
+              price={property.price}
               linkTo={`/international-properties/${property._id}`}
             />
           ))}
