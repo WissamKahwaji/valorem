@@ -101,26 +101,49 @@ const Navbar = () => {
   ];
 
   const [showDrawer, setShowDrawer] = useState(false);
-  const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
-  const [subDropdownIndex, setSubDropdownIndex] = useState<number | null>(null);
-  const [subsubDropdownIndex, setSubSubDropdownIndex] = useState<number | null>(
-    null
+  // const [dropdownIndex, setDropdownIndex] = useState<number | null>(null);
+  const [dropdownStates, setDropdownStates] = useState(
+    Array(navItems.length).fill(false)
   );
+
+  // const [subDropdownIndex, setSubDropdownIndex] = useState<number | null>(null);
+  const [subDropdownIndex, setSubDropdownIndex] = useState(
+    Array(2).fill(false)
+  );
+
+  // const [subsubDropdownIndex, setSubSubDropdownIndex] = useState<number | null>(
+  //   null
+  // );
+  const [subsubDropdownIndex, setSubSubDropdownIndex] = useState(
+    Array(2).fill(false)
+  );
+
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
   const toggleDropdown = (index: number) => {
-    setDropdownIndex(dropdownIndex === index ? null : index);
-    setSubDropdownIndex(null);
+    setDropdownStates(prevStates => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
   };
 
   const toggleSubDropdown = (index: number) => {
-    setSubDropdownIndex(subDropdownIndex === index ? null : index);
+    setSubDropdownIndex(prevStates => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
   };
 
   const toggleSubSubDropdown = (index: number) => {
-    setSubSubDropdownIndex(subsubDropdownIndex === index ? null : index);
+    setSubSubDropdownIndex(prevStates => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
   };
 
   return (
@@ -204,11 +227,11 @@ const Navbar = () => {
                           {item.title}
                           <AiOutlineDown
                             className={`ml-1 transition duration-300 transform ${
-                              dropdownIndex === index ? "rotate-180" : ""
+                              dropdownStates[index] === true ? "rotate-180" : ""
                             }`}
                           />
                         </button>
-                        {dropdownIndex === index && (
+                        {dropdownStates[index] === true && (
                           <div className="pl-8">
                             {item.dropdownItems.map(
                               (dropdownItem, dropdownIndex) => (
@@ -219,18 +242,20 @@ const Navbar = () => {
                                         onClick={() =>
                                           toggleSubDropdown(dropdownIndex)
                                         }
-                                        className={`flex flex-row text-start items-center  font-header   py-2 text-gray-200  uppercase `}
+                                        className={`flex flex-row text-start items-center  font-body   py-2 text-gray-200  uppercase `}
                                       >
                                         {dropdownItem.title}
                                         <AiOutlineDown
                                           className={`ml-1 transition duration-300 transform ${
-                                            subDropdownIndex === dropdownIndex
+                                            subDropdownIndex[dropdownIndex] ===
+                                            true
                                               ? "rotate-180"
                                               : ""
                                           }`}
                                         />
                                       </button>
-                                      {subDropdownIndex === dropdownIndex && (
+                                      {subDropdownIndex[dropdownIndex] ===
+                                        true && (
                                         <div className="pl-4">
                                           {dropdownItem.dropdownItems.map(
                                             (
@@ -245,26 +270,28 @@ const Navbar = () => {
                                                         subDropdownIndex
                                                       )
                                                     }
-                                                    className={`flex flex-row justify-center items-center font-header  py-2 text-gray-200  uppercase `}
+                                                    className={`flex flex-row justify-center items-center font-serif  py-2 text-hoverColor  capitalize `}
                                                   >
                                                     {subDropdownItem.title}
                                                     <AiOutlineDown
                                                       className={`ml-1 transition duration-300 transform ${
-                                                        subDropdownIndex ===
-                                                        subsubDropdownIndex
+                                                        subsubDropdownIndex[
+                                                          subDropdownIndex
+                                                        ] === true
                                                           ? "rotate-180"
                                                           : ""
                                                       }`}
                                                     />
                                                   </button>
-                                                  {subDropdownIndex ===
-                                                    subsubDropdownIndex &&
+                                                  {subsubDropdownIndex[
+                                                    subDropdownIndex
+                                                  ] === true &&
                                                     subDropdownItem.dropdownItems.map(
                                                       (item, index) => (
                                                         <Link
                                                           onClick={toggleDrawer}
                                                           to={item.path}
-                                                          className={`block font-header px-4 py-2 text-gray-200   uppercase ${
+                                                          className={`block font-body px-4 py-2 text-gray-300  capitalize ${
                                                             item.path ===
                                                             currentPath
                                                               ? "bg-hoverColor/20"
@@ -281,7 +308,7 @@ const Navbar = () => {
                                                   <Link
                                                     onClick={toggleDrawer}
                                                     to={subDropdownItem.path}
-                                                    className={`block font-header  py-2 text-gray-200   uppercase ${
+                                                    className={`block font-serif  py-2 text-hoverColor  capitalize ${
                                                       subDropdownItem.path ===
                                                       currentPath
                                                         ? "bg-hoverColor/20"
@@ -301,7 +328,7 @@ const Navbar = () => {
                                       onClick={toggleDrawer}
                                       to={dropdownItem.path}
                                       state={dropdownItem.state}
-                                      className={`block font-header  py-2 text-gray-200   uppercase ${
+                                      className={`block font-body  py-2 text-gray-200   uppercase ${
                                         dropdownItem.path === currentPath
                                           ? "bg-hoverColor/20"
                                           : ""
@@ -392,11 +419,11 @@ const Navbar = () => {
                     {item.title}
                     <AiOutlineDown
                       className={`ml-1 transition duration-300 transform ${
-                        dropdownIndex === index ? "rotate-180" : ""
+                        dropdownStates[index] === true ? "rotate-180" : ""
                       }`}
                     />
                   </button>
-                  {dropdownIndex === index && (
+                  {dropdownStates[index] === true && (
                     <div className="absolute top-full left-full md:left-0 z-[1000] bg-white shadow-md rounded-md mt-1 md:mt-0 md:ml-1">
                       {item.dropdownItems.map((dropdownItem, dropdownIndex) => (
                         <div key={dropdownIndex}>
@@ -404,7 +431,7 @@ const Navbar = () => {
                             <div className="">
                               <button
                                 onClick={() => toggleSubDropdown(dropdownIndex)}
-                                className={`flex flex-row text-start justify-center items-center font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                className={`flex flex-row text-start justify-center items-center font-body px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
                                   dropdownItem.path === currentPath
                                     ? "bg-gray-200"
                                     : ""
@@ -413,14 +440,14 @@ const Navbar = () => {
                                 {dropdownItem.title}{" "}
                                 <AiOutlineRight
                                   className={`ml-1 transition duration-300 transform ${
-                                    subDropdownIndex === dropdownIndex
+                                    subDropdownIndex[dropdownIndex] === true
                                       ? "rotate-180"
                                       : ""
                                   }`}
                                 />
                               </button>
 
-                              {subDropdownIndex === dropdownIndex && (
+                              {subDropdownIndex[dropdownIndex] === true && (
                                 <div className=" md:absolute md:left-full md:top-14 z-[1001] bg-white shadow-md rounded-md mt-2  mx-1">
                                   {dropdownItem.dropdownItems.map(
                                     (subDropdownItem, subDropdownIndex) =>
@@ -432,9 +459,10 @@ const Navbar = () => {
                                                 subDropdownIndex
                                               )
                                             }
-                                            className={`flex flex-row text-start justify-center items-center font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
-                                              subDropdownIndex ===
-                                              subsubDropdownIndex
+                                            className={`flex flex-row text-start justify-center items-center font-serif px-2 py-2 text-subTitle hover:bg-gray-200 capitalize ${
+                                              subsubDropdownIndex[
+                                                subDropdownIndex
+                                              ] === true
                                                 ? "bg-gray-200"
                                                 : ""
                                             }`}
@@ -442,15 +470,17 @@ const Navbar = () => {
                                             {subDropdownItem.title}
                                             <AiOutlineDown
                                               className={`ml-1 transition duration-300 transform ${
-                                                subDropdownIndex ===
-                                                subsubDropdownIndex
+                                                subsubDropdownIndex[
+                                                  subDropdownIndex
+                                                ] === true
                                                   ? "rotate-180"
                                                   : ""
                                               }`}
                                             />
                                           </button>
-                                          {subDropdownIndex ===
-                                            subsubDropdownIndex &&
+                                          {subsubDropdownIndex[
+                                            subDropdownIndex
+                                          ] === true &&
                                             subDropdownItem.dropdownItems.map(
                                               (item, index) => (
                                                 <Link
@@ -458,7 +488,7 @@ const Navbar = () => {
                                                     toggleDropdown(index);
                                                   }}
                                                   to={item.path}
-                                                  className={`md:flex md:left-full md:top-16 font-header px-4 py-2 text-gray-800 bg-white hover:bg-gray-200  uppercase ${
+                                                  className={`md:flex md:left-full md:top-16 font-body px-4 py-2 text-gray-400 bg-white hover:bg-gray-200  capitalize ${
                                                     item.path === currentPath
                                                       ? "bg-gray-300"
                                                       : ""
@@ -477,7 +507,7 @@ const Navbar = () => {
                                             }}
                                             key={subDropdownIndex}
                                             to={subDropdownItem.path}
-                                            className={`block font-header px-4 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                                            className={`block font-serif px-2 py-2 text-subTitle hover:bg-gray-200 capitalize ${
                                               subDropdownItem.path ===
                                               currentPath
                                                 ? "bg-gray-200"
@@ -497,7 +527,7 @@ const Navbar = () => {
                               onClick={() => toggleDropdown(index)}
                               to={dropdownItem.path}
                               state={dropdownItem.state}
-                              className={`block  font-header px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
+                              className={`block  font-body px-2 py-2 text-gray-800 hover:bg-gray-200 uppercase ${
                                 dropdownItem.path === currentPath
                                   ? "bg-gray-200"
                                   : ""
