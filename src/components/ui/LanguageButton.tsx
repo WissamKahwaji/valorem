@@ -4,7 +4,7 @@ import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 const LanguageButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [lang, setLang] = useState("en");
-  const langList = ["en", "ar"];
+  const langList = ["en", "العربية"];
   return (
     <div className="relative flex flex-col items-center  rounded-lg">
       <button
