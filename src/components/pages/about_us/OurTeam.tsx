@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TeamMemberItem from "../../items/about_us/TeamMemberItem";
 import { useGetOurTeamInfoQuery } from "../../../api/our_team/queries";
 import LoadingPage from "../../../pages/loadingPage/LoadingPage";
 
@@ -17,11 +16,15 @@ const OurTeam = () => {
   return (
     <div className="bg-background py-10">
       <div className="">
-        <h1 className="text-3xl md:text-5xl text-primary font-header  text-center mb-5 lg:mb-16">
-          Our Management Team
+        <h1 className="text-3xl md:text-5xl text-primary font-header  text-center mb-5 lg:mb-12">
+          Valorem Real Estate Brokers Founder and Owner
         </h1>
         <p className="text-hoverColor font-header text-center mb-16 text-lg md:text-xl lg:text-2xl w-3/4 mx-auto">
-          {ourTeamInfo?.description}
+          Success isn’t just about what you accomplish in you life. It’s about
+          what you inspire others to do. <br />
+          <br />
+          Success is the progression of a worthy idea, it’s about who you become
+          as a person.
         </p>
 
         <div className=" flex flex-col md:flex-row md:space-x-5 md:mx-10 lg:mx-60 mx-2 justify-start items-start md:justify-start md:items-start">
@@ -55,17 +58,16 @@ const OurTeam = () => {
             </div>
           </div>
         </div>
-        <hr className="w-3/4 mx-auto my-10" />
-        <div className=" grid grid-flow-row  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7 justify-center items-center  md:mx-10 lg:mx-60">
+        <hr className="w-3/4 mx-auto mt-10" />
+      </div>
+    </div>
+  );
+};
+
+export default OurTeam;
+/* <div className=" grid grid-flow-row  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7 justify-center items-center  md:mx-10 lg:mx-60">
           {teamArray &&
             teamArray.map((member, index) => (
-              // <TeamMemberItem
-              //   id={index}
-              //   name={member.name}
-              //   jobTitle={member.jobTitle}
-              //   description={member.jobTitle}
-              //   img={member.img}
-              // />
               <div className=" md:mb-10 flex  flex-row space-x-2 md:space-x-5 mx-2 justify-start items-start md:justify-start md:items-start ">
                 <div className="w-full h-[150px] md:w-[350px] md:h-[200px] overflow-hidden border border-gray-300 rounded-lg shadow-lg group">
                   <img
@@ -81,27 +83,8 @@ const OurTeam = () => {
                   <p className="text-xs md:text-base text-hoverColor font-body uppercase">
                     {member.jobTitle}
                   </p>
-                  {/* <div className="text-gray-600 whitespace-pre-wrap font-serif text-sm">
-                    {showFullBrief
-                      ? ourTeamInfo?.team.at(0)?.brief
-                      : ourTeamInfo?.team.at(0)?.brief.slice(0, 500)}
-                    {ourTeamInfo?.team.at(0)?.brief &&
-                      ourTeamInfo?.team.at(0)?.brief.length! > 100 && (
-                        <span
-                          className="cursor-pointer text-subTitle"
-                          onClick={toggleBrief}
-                        >
-                          {showFullBrief ? " Show Less" : " Show More"}
-                        </span>
-                      )}
-                  </div> */}
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default OurTeam;
+                
+                  </div>
+                  </div>
+                ))}
+            </div>*/
