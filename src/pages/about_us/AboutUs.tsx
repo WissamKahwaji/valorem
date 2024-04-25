@@ -42,6 +42,7 @@ const AboutUs = () => {
           }}
         />
         <Statistics />
+        <OurTeam />
         <div>
           {aboutUsInfo?.content.map((content, index) => (
             <AboutContentItem
@@ -65,7 +66,7 @@ const AboutUs = () => {
             backgroundImage: `url(https://cloud.famproperties.com/project/large/al-habtoor-city-344694-143939.jpg)`,
           }}
         ></div>
-        <OurTeam />
+
         <OurAgents />
         <BackgroundImage
           minHeight={"min-h-[300px] md:min-h-[700px]"}
