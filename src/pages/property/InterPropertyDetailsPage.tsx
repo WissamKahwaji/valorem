@@ -16,12 +16,14 @@ const InterPropertyDetailsPage = () => {
   const { data: property } = useGetInterPropertiesInfoByIdQuery(id);
 
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: window.location.pathname,
-      title: "International Property Details Page",
-    });
-  }, []);
+    if (property) {
+      ReactGA.send({
+        hitType: "pageview",
+        page: window.location.pathname,
+        title: property.name,
+      });
+    }
+  }, [property]);
 
   const settings = {
     dots: true,
