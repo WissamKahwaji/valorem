@@ -1,5 +1,4 @@
 import React from "react";
-import { Provider } from "react-redux";
 // import { store } from "./app/store";
 import Routes from "./Routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -9,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactGA from "react-ga4";
 
 const Wrapper = () => {
-  ReactGA.initialize("YOUR_TRACKING_ID");
+  ReactGA.initialize("G-NMZBB9Z5D3");
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
