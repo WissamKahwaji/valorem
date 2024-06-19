@@ -21,9 +21,9 @@ const PropertyDetailsPage = () => {
     ReactGA.send({
       hitType: "pageview",
       page: window.location.pathname,
-      title: "Property Details Page",
+      title: property?.name ?? "property detail page",
     });
-  }, []);
+  }, [property]);
   const settings = {
     dots: true,
     infinite: true,
