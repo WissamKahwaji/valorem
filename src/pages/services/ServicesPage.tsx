@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import HeaderSection from "../../components/pages/property_page/HeaderSection";
 import LoadingPage from "../loadingPage/LoadingPage";
 import { useGetOurServicesInfoQuery } from "../../api/our_services/queries";
+import ReactGA from "react-ga4";
 
 const ServicesPage = () => {
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "Service Page",
+    });
+  }, []);
+
   const {
     data: ourServices,
     isLoading,

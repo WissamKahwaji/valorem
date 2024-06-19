@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 
 import ContactInfoSection from "../../components/pages/contact_us/ContactInfoSection";
 import ContactForm from "../../components/pages/contact_us/ContactForm";
 import { useGetContactUsInfo } from "../../api/contact_us/query";
+import ReactGA from "react-ga4";
 
 const ContactUs = () => {
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "Contact Us Page",
+    });
+  }, []);
+
   const { data: contactUsInfo } = useGetContactUsInfo();
   console.log(contactUsInfo?.content);
   return (

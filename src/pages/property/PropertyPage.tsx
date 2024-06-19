@@ -9,6 +9,8 @@ import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { PropertyPathParams } from "./type";
 import { PropertyInfo } from "../../api/properties/type";
 import { InterPropertyInfo } from "../../api/inter_property/type";
+import ReactGA from "react-ga4";
+
 const PropertyPage = () => {
   const { propertyLocation } = useParams<PropertyPathParams>();
   const tt = propertyLocation ?? "all";
@@ -30,6 +32,14 @@ const PropertyPage = () => {
     useGetPropertiesInfoQuery(propertyQuery);
   const { data: interPropertyInfo, refetch: refetchInterProperties } =
     useGetInterPropertiesInfoQuery(propertyQuery);
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "Properties Page",
+    });
+  }, []);
 
   useEffect(() => {
     if (propertyInfo) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeSlider from "../../components/pages/home/HomeSlider";
 import BreifSection from "../../components/pages/home/BreifSection";
 import PropertySection from "../../components/pages/home/PropertySection";
@@ -12,8 +12,17 @@ import ContactFooter from "../../components/items/home/ContactFooter";
 import { motion } from "framer-motion";
 import { useGetAboutUsInfoQuery } from "../../api/about_us/queries";
 import InterPropertySection from "../../components/pages/home/InterPropertySection";
+import ReactGA from "react-ga4";
 
 const Home = () => {
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "Home Page",
+    });
+  }, []);
+
   const { data: aboutUsInfo } = useGetAboutUsInfoQuery();
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import HeaderSection from "../../components/pages/property_page/HeaderSection";
 import Slider from "react-slick";
@@ -12,11 +12,18 @@ import "react-multi-carousel/lib/styles.css";
 import { IdParams } from "./type";
 import { useParams } from "react-router-dom";
 import { useGetPropertiesInfoByIdQuery } from "../../api/properties/queries";
+import ReactGA from "react-ga4";
 
 const PropertyDetailsPage = () => {
   const { id } = useParams<IdParams>();
   const { data: property } = useGetPropertiesInfoByIdQuery(id);
-
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "Property Details Page",
+    });
+  }, []);
   const settings = {
     dots: true,
     infinite: true,

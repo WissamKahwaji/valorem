@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IdParams } from "./type";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -7,15 +7,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { LiaAngleDoubleRightSolid } from "react-icons/lia";
-
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useGetInterPropertiesInfoByIdQuery } from "../../api/inter_property/queries";
+import ReactGA from "react-ga4";
 
 const InterPropertyDetailsPage = () => {
   const { id } = useParams<IdParams>();
   const { data: property } = useGetInterPropertiesInfoByIdQuery(id);
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "International Property Details Page",
+    });
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -51,32 +58,7 @@ const InterPropertyDetailsPage = () => {
       },
     ],
   };
-  const PRODUCT_TYPE_CAROUSAL_RESPONSIVE = {
-    xxl: {
-      breakpoint: { max: 5000, min: 1536 },
-      items: 1,
-    },
-    xl: {
-      breakpoint: { max: 1536, min: 1280 },
-      items: 1,
-    },
-    lg: {
-      breakpoint: { max: 1280, min: 1024 },
-      items: 1,
-    },
-    md: {
-      breakpoint: { max: 1024, min: 768 },
-      items: 1,
-    },
-    sm: {
-      breakpoint: { max: 768, min: 640 },
-      items: 1,
-    },
-    xs: {
-      breakpoint: { max: 640, min: 0 },
-      items: 1,
-    },
-  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

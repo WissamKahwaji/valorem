@@ -6,7 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactGA from "react-ga4";
+
 const Wrapper = () => {
+  ReactGA.initialize("YOUR_TRACKING_ID");
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

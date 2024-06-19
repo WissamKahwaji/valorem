@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FirstSection from "../../components/pages/about_us/FirstSection";
 import Statistics from "../../components/pages/about_us/Statistics";
 import AboutContent from "../../components/pages/about_us/AboutContent";
@@ -13,8 +13,17 @@ import LoadingPage from "../loadingPage/LoadingPage";
 import { useGetAboutUsInfoQuery } from "../../api/about_us/queries";
 import AboutContentItem from "../../components/items/about_us/AboutContentItem";
 import { useNavigate } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 const AboutUs = () => {
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: window.location.pathname,
+      title: "About Us Page",
+    });
+  }, []);
+
   const { data: aboutUsInfo, isLoading, isError } = useGetAboutUsInfoQuery();
   const navigate = useNavigate();
   if (isLoading) return <LoadingPage />;
