@@ -18,11 +18,13 @@ const PropertyDetailsPage = () => {
   const { id } = useParams<IdParams>();
   const { data: property } = useGetPropertiesInfoByIdQuery(id);
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: window.location.pathname,
-      title: property?.name ?? "property detail page",
-    });
+    if (property) {
+      ReactGA.send({
+        hitType: "pageview",
+        page: window.location.pathname,
+        title: property.name,
+      });
+    }
   }, [property]);
   const settings = {
     dots: true,
